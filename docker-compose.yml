@@ -1,9 +1,9 @@
 nginx:
  container_name: nginx
  image: nginx
- volumes:
-  - /home/docker/html/justeduson2teuf:/usr/share/nginx/html
-  - /home/docker/conf/nginx/:/etc/nginx/conf.d/
+ volumes: #/home/docker/html/ --> Répertoire local du dossier HTML
+  - /home/docker/html/:/usr/share/nginx/html
+  - /home/docker/conf/nginx/:/etc/nginx/conf.d/ #conf custom de NGINX pour permmetre la communication avec php5-fpm
  ports:
   - 80:80
  links:
@@ -12,10 +12,10 @@ nginx:
 
 php5-fpm:
  container_name: php5-fpm
- build: /home/docker/dockerfile/.
+ build: /home/docker/dockerfile/. #Dockerfile d'installation de Php5-fpm présent dans le dossier "dockerfile"
  volumes:
-  - /home/docker/html/justeduson2teuf:/usr/share/nginx/html
-  - /home/docker/conf/php:/etc/php5/fpm/pool.d/
+  - /home/docker/html/:/usr/share/nginx/html #Il est nécessaire de monter également le volume html sur le containeur php pour permettre l'éxecution de celui-ci
+  - /home/docker/conf/php:/etc/php5/fpm/pool.d/ #conf custom de php (listen=9000)
  ports: 
   - 9000:9000
  links:
@@ -25,8 +25,8 @@ mariadb:
  container_name: mariadb
  image: mariadb
  volumes:
-  - /home/docker/bdd/:/var/lib/mysql
+  - /home/docker/bdd/:/var/lib/mysql # Montage des bdd sur un répertoire local
  environment:
-  MYSQL_ROOT_PASSWORD: justinien
+  MYSQL_ROOT_PASSWORD: METTRESONMOTDEPASSE # si le mot de passe est changé ici, alors que le docker-compose a déja été executé, l'ancien mot de passe sera effectif et non le nouveau
  ports:
     - "3306:3306"
