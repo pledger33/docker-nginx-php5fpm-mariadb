@@ -1,0 +1,32 @@
+nginx:
+ container_name: nginx
+ image: nginx
+ volumes:
+  - /home/docker/html/justeduson2teuf:/usr/share/nginx/html
+  - /home/docker/conf/nginx/:/etc/nginx/conf.d/
+ ports:
+  - 80:80
+ links:
+  - php5-fpm
+  - mariadb
+
+php5-fpm:
+ container_name: php5-fpm
+ build: /home/docker/dockerfile/.
+ volumes:
+  - /home/docker/html/justeduson2teuf:/usr/share/nginx/html
+  - /home/docker/conf/php:/etc/php5/fpm/pool.d/
+ ports: 
+  - 9000:9000
+ links:
+  - mariadb:mysql
+
+mariadb:
+ container_name: mariadb
+ image: mariadb
+ volumes:
+  - /home/docker/bdd/:/var/lib/mysql
+ environment:
+  MYSQL_ROOT_PASSWORD: justinien
+ ports:
+    - "3306:3306"
