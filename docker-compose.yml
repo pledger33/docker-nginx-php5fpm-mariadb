@@ -12,7 +12,7 @@ nginx:
 
 php5-fpm:
  container_name: php5-fpm
- image: lejuste/php5fpm-4-nginx #Dockerfile d'installation de Php5-fpm présent dans le dossier "dockerfile"
+ image: lejuste/php5fpm-4-nginx:1.0 #Dockerfile d'installation de Php5-fpm présent dans le dossier "dockerfile"
  volumes:
   - /home/docker/html/:/usr/share/nginx/html #Il est nécessaire de monter également le volume html sur le containeur php pour permettre l'éxecution de celui-ci
   - /home/docker/conf/php:/etc/php5/fpm/pool.d/ #conf custom de php (listen=9000)
