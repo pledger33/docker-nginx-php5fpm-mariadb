@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Check file') {
       steps {
-        fileExists 'docker-compose.yml'
+        fileExists 'DDdocker-compose.yml'
       }
     }
     stage('Fin') {
