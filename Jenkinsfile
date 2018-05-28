@@ -11,5 +11,9 @@ pipeline {
         sh 'touch /tmp/test2'
       }
     }
+     stage('Checkout') {
+        checkout(scm)
+        sh 'git clean -xdf'
+    }
   }
 }
