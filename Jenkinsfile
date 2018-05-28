@@ -11,6 +11,15 @@ pipeline {
         sh 'touch /tmp/test2'
       }
     }
- 
+    stage('Check file') {
+      steps {
+        fileExists 'docker-compose.yml'
+      }
+    }
+    stage('Fin') {
+      steps {
+        echo 'FIN'
+      }
+    }
   }
 }
