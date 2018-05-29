@@ -1,25 +1,13 @@
 pipeline {
-  agent any
-  stages {
-    stage('Test1 ') {
-      steps {
-        echo 'Test n1'
-      }
+    agent any
+    parameters {
+        string(name: 'PERSON', defaultValue: 'Mr Pareil', description: 'Je suis là baby !')
     }
-    stage('Test2') {
-      steps {
-        sh 'touch /tmp/test2'
-      }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello ${params.PERSON}"
+            }
+        }
     }
-    stage('Check file') {
-      steps {
-        fileExists 'DDdocker-compose.yml'
-      }
-    }
-    stage('Fin') {
-      steps {
-        echo 'FIN'
-      }
-    }
-  }
 }
